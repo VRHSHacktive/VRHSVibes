@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASTRONOMIA // Celestial Classification & Observational Field Guide</title>
+  <!-- Load Inter & JetBrains Mono fonts for clean typography and scientific telemetry -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Load Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            void: '#050811',
+            nebulaCard: '#0d1324',
+            stellarCyan: '#38bdf8',
+            nebulaPurple: '#a855f7',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Deep Space Base Styling & Custom CSS Starfield */
+    :root {
+      --bg-void: #050811;
+      --bg-card: rgba(13, 19, 36, 0.78);
+      --border-glass: rgba(148, 163, 184, 0.16);
+      --accent-cyan: #38bdf8;
+      --accent-purple: #a855f7;
+    }
+
+    body {
+      background-color: var(--bg-void);
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+
+    /* Multi-layered pure CSS starfield */
+    .starfield-bg {
+      background-color: #050811;
+      background-image:
+        radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.85) 50%, transparent 100%),
+        radial-gradient(1px 1px at 28% 42%, rgba(56, 189, 248, 0.75) 50%, transparent 100%),
+        radial-gradient(2px 2px at 44% 14%, rgba(255, 255, 255, 0.9) 50%, transparent 100%),
+        radial-gradient(1px 1px at 67% 31%, rgba(168, 85, 247, 0.7) 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 83% 22%, rgba(255, 255, 255, 0.8) 50%, transparent 100%),
+        radial-gradient(1px 1px at 91% 58%, rgba(255, 255, 255, 0.6) 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 19% 76%, rgba(255, 255, 255, 0.75) 50%, transparent 100%),
+        radial-gradient(1px 1px at 53% 84%, rgba(56, 189, 248, 0.65) 50%, transparent 100%),
+        radial-gradient(2px 2px at 74% 89%, rgba(255, 255, 255, 0.85) 50%, transparent 100%),
+        radial-gradient(ellipse at 20% 0%, rgba(56, 189, 248, 0.11) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(168, 85, 247, 0.12) 0%, transparent 55%);
+      background-size: 650px 650px, 520px 520px, 780px 780px, 600px 600px, 710px 710px, 490px 490px, 680px 680px, 550px 550px, 820px 820px, 100% 100%, 100% 100%;
+    }
+
+    /* Glassmorphism Surface Cards */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-glass);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.65);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.35);
+      box-shadow: 0 14px 36px -10px rgba(56, 189, 248, 0.12);
+    }
+
+    /* Glassmorphic Header */
+    .glass-nav {
+      background: rgba(5, 8, 17, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    }
+
+    /* Pure CSS Spectral Class Gradient Bar */
+    .spectral-bar {
+      background: linear-gradient(
+        90deg,
+        #638cff 0%,
+        #9bb8ff 16%,
+        #cad8ff 33%,
+        #f8f7ff 50%,
+        #fff2a1 67%,
+        #ffbd6f 84%,
+        #ff6b4a 100%
+      );
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.25);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #050811;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #38bdf8;
+    }
+
+    /* Section Anchor Offset for Sticky Header */
+    section[id], div[id] {
+      scroll-margin-top: 5.5rem;
+    }
+  </style>
+</head>
+<body class="starfield-bg font-sans antialiased selection:bg-sky-500/30 selection:text-sky-200">
+
+  <!-- ==================== STICKY NAVIGATION BAR ==================== -->
+  <header class="glass-nav sticky top-0 z-50 w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand Logo -->
+        <a href="#top" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-purple-500 p-[1px] shadow-lg shadow-sky-500/20">
+            <div class="w-full h-full bg-[#050811] rounded-[11px] flex items-center justify-center">
+              <!-- Inline SVG Telescope/Star Emblem -->
+              <svg class="w-5 h-5 text-sky-400 group-hover:rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="9" stroke-dasharray="3 3" class="text-purple-400"/>
+                <circle cx="12" cy="12" r="3" fill="currentColor" class="text-sky-300"/>
+                <path stroke-linecap="round" d="M12 2v2m0 16v2M2 12h2m16 0h2"/>
+              </svg>
+            </div>
+          </div>
+          <div>
+            <span class="font-bold tracking-wider text-white text-base sm:text-lg">ASTRONOMIA</span>
+            <span class="hidden sm:inline-block ml-2 text-[11px] font-mono uppercase tracking-widest text-sky-400 bg-sky-400/10 border border-sky-400/20 px-2 py-0.5 rounded-full">Field Atlas</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-medium">
+          <a href="#classification" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Classification</a>
+          <a href="#optics" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Optics & Gear</a>
+          <a href="#coordinates" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Celestial Coordinates</a>
+          <a href="#stargazing" class="px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Stargazing & Star-Hopping</a>
+        </nav>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" type="button" aria-label="Toggle Menu" class="md:hidden p-2.5 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 border border-white/10 transition">
+          <svg id="menu-icon-open" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-800/80 bg-[#050811]/95 backdrop-blur-xl px-4 pt-3 pb-5 space-y-1.5">
+      <a href="#classification" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-sky-500/10 hover:text-sky-300">1. Celestial Classification & ID</a>
+      <a href="#optics" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-sky-500/10 hover:text-sky-300">2. Telescopes & Binoculars</a>
+      <a href="#coordinates" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-sky-500/10 hover:text-sky-300">3. Celestial Coordinates</a>
+      <a href="#stargazing" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-sky-500/10 hover:text-sky-300">4. Stargazing & Star-Hopping</a>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <main id="top">
+    <section class="relative pt-14 pb-20 sm:pt-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <!-- Ambient CSS Glow Orbs -->
+      <div class="pointer-events-none absolute -top-24 left-1/4 w-96 h-96 bg-sky-500/15 rounded-full blur-3xl"></div>
+      <div class="pointer-events-none absolute top-28 right-1/4 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl"></div>
+
+      <div class="max-w-7xl mx-auto relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-sky-400/30 text-xs font-mono text-sky-300 mb-6 shadow-md">
+          <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+          OBSERVATIONAL &amp; THEORETICAL ASTROPHYSICS COMPENDIUM
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-[1.12]">
+          Decoding the Cosmos: From
+          <span class="bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Spectral Taxonomy</span>
+          to Deep-Sky Navigation
+        </h1>
+
+        <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+          A complete scientific field manual covering how astronomers classify planets, stars, nebulae, and galaxies—paired with practical optical mechanics, coordinate geometry, and visual star-hopping techniques.
+        </p>
+
+        <!-- Quick-Jump Action Buttons -->
+        <div class="mt-9 flex flex-wrap items-center justify-center gap-3.5">
+          <a href="#classification" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-semibold text-sm shadow-lg shadow-sky-500/25 transition">
+            Explore Object Taxonomy
+          </a>
+          <a href="#optics" class="px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 hover:border-sky-400/50 font-semibold text-sm transition">
+            Telescope &amp; Binocular Optics
+          </a>
+          <a href="#stargazing" class="px-6 py-3.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-purple-300 border border-purple-500/30 hover:border-purple-400 font-semibold text-sm transition">
+            Start Star-Hopping &rarr;
+          </a>
+        </div>
+
+        <!-- Quick Sub-Category Anchor Pills -->
+        <div class="mt-12 pt-8 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-4xl mx-auto">
+          <a href="#planets" class="glass-card rounded-xl p-3.5 text-left group">
+            <div class="text-xs font-mono text-sky-400">01.A // SOLAR SYSTEM</div>
+            <div class="text-sm font-semibold text-white mt-0.5 group-hover:text-sky-300 transition">Planetary Classes &rarr;</div>
+          </a>
+          <a href="#stars" class="glass-card rounded-xl p-3.5 text-left group">
+            <div class="text-xs font-mono text-amber-300">01.B // ASTROPHYSICS</div>
+            <div class="text-sm font-semibold text-white mt-0.5 group-hover:text-amber-200 transition">MK Stellar Spectra &rarr;</div>
+          </a>
+          <a href="#nebulae" class="glass-card rounded-xl p-3.5 text-left group">
+            <div class="text-xs font-mono text-purple-400">01.C // INTERSTELLAR</div>
+            <div class="text-sm font-semibold text-white mt-0.5 group-hover:text-purple-300 transition">Nebulae Taxonomy &rarr;</div>
+          </a>
+          <a href="#galaxies" class="glass-card rounded-xl p-3.5 text-left group">
+            <div class="text-xs font-mono text-emerald-400">01.D // COSMOLOGY</div>
+            <div class="text-sm font-semibold text-white mt-0.5 group-hover:text-emerald-300 transition">Hubble Sequence &rarr;</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 1: CLASSIFICATION & IDENTIFICATION ==================== -->
+    <section id="classification" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-800/70">
+      <div class="max-w-7xl mx-auto">
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-14">
+          <span class="font-mono text-xs uppercase tracking-widest text-sky-400">Section 01 // Astrophysical Taxonomy</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Classification &amp; Identification of Celestial Objects</h2>
+          <p class="text-slate-300 mt-3 text-base leading-relaxed">
+            Every photon arriving at your eye or telescope carries physical signatures—temperature, composition, distance, and morphology. Understanding taxonomic classes allows observers to distinguish solar system worlds from deep-sky relics at a glance.
+          </p>
+        </div>
+
+        <!-- ==================== 1.1 PLANETS ==================== -->
+        <div id="planets" class="mb-20">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
+            <div>
+              <h3 class="text-2xl font-bold text-white flex items-center gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+                1.1 Planetary Classification &amp; Visual Identification
+              </h3>
+              <p class="text-slate-400 text-sm mt-1">Compositional categories defined by bulk density, volatile retention, and IAU dynamical criteria.</p>
+            </div>
+            <span class="font-mono text-xs text-slate-400 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg">8 Major Planets &bull; 5+ IAU Dwarf Planets</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Terrestrial Planets -->
+            <article class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-amber-500/15 text-amber-300 border border-amber-500/30">TERRESTRIAL</span>
+                  <div class="w-7 h-7 rounded-full bg-gradient-to-br from-amber-300 via-orange-500 to-stone-700 shadow-inner"></div>
+                </div>
+                <h4 class="text-lg font-bold text-white">Rocky Inner Worlds</h4>
+                <p class="text-xs font-mono text-slate-400 mt-0.5">Mercury, Venus, Earth, Mars</p>
+                <p class="text-sm text-slate-300 mt-3 leading-relaxed">
+                  High bulk densities (3.9–5.5 g/cm³) composed primarily of silicate mantles and iron-nickel cores. Located inside the solar system's frost line, they possess solid surfaces, thin or secondary atmospheres, and few or no natural satellites.
+                </p>
+              </div>
+              <div class="mt-5 pt-4 border-t border-slate-800/90 text-xs text-slate-400 space-y-1">
+                <div><strong class="text-slate-200">Telescopic View:</strong> Venus &amp; Mercury show distinct lunar-like phases; Mars displays polar ice caps and dark albedo markings near opposition.</div>
+              </div>
+            </article>
+
+            <!-- Gas Giants -->
+            <article class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-orange-500/15 text-orange-300 border border-orange-500/30">GAS GIANTS</span>
+                  <div class="w-7 h-7 rounded-full bg-gradient-to-b from-amber-200 via-orange-400 to-amber-700"></div>
+                </div>
+                <h4 class="text-lg font-bold text-white">Jovian Hydrogen Worlds</h4>
+                <p class="text-xs font-mono text-slate-400 mt-0.5">Jupiter, Saturn</p>
+                <p class="text-sm text-slate-300 mt-3 leading-relaxed">
+                  Massive envelopes of molecular and metallic hydrogen and helium surrounding dense rocky/icy cores. Rapid rotation drives banded zonal jet streams, anticyclonic storms (Great Red Spot), strong magnetospheres, and extensive ring and moon systems.
+                </p>
+              </div>
+              <div class="mt-5 pt-4 border-t border-slate-800/90 text-xs text-slate-400 space-y-1">
+                <div><strong class="text-slate-200">Telescopic View:</strong> Even small 60–80mm scopes resolve Jupiter's four Galilean moons, equatorial cloud belts, and Saturn's iconic Cassini Division ring system.</div>
+              </div>
+            </article>
+
+            <!-- Ice Giants -->
+            <article class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-sky-500/15 text-sky-300 border border-sky-500/30">ICE GIANTS</span>
+                  <div class="w-7 h-7 rounded-full bg-gradient-to-br from-cyan-300 to-blue-600"></div>
+                </div>
+                <h4 class="text-lg font-bold text-white">Volatile-Rich Giants</h4>
+                <p class="text-xs font-mono text-slate-400 mt-0.5">Uranus, Neptune</p>
+                <p class="text-sm text-slate-300 mt-3 leading-relaxed">
+                  Unlike Jupiter and Saturn, hydrogen and helium make up less than 20% of their mass. Their interiors are dominated by high-pressure fluid mantles of "ices"—water (H₂O), ammonia (NH₃), and methane (CH₄). Atmospheric methane absorbs red light, imparting cyan and azure hues.
+                </p>
+              </div>
+              <div class="mt-5 pt-4 border-t border-slate-800/90 text-xs text-slate-400 space-y-1">
+                <div><strong class="text-slate-200">Telescopic View:</strong> Appear as tiny, crisp, non-stellar turquoise (Uranus, mag +5.7) or deep cobalt (Neptune, mag +7.8) discs at 150x+ magnification.</div>
+              </div>
+            </article>
+
+            <!-- Dwarf Planets -->
+            <article class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-purple-500/15 text-purple-300 border border-purple-500/30">DWARF PLANETS</span>
+                  <div class="w-7 h-7 rounded-full bg-gradient-to-br from-slate-300 to-slate-600"></div>
+                </div>
+                <h4 class="text-lg font-bold text-white">IAU Sub-Planetary Bodies</h4>
+                <p class="text-xs font-mono text-slate-400 mt-0.5">Ceres, Pluto, Haumea, Makemake, Eris</p>
+                <p class="text-sm text-slate-300 mt-3 leading-relaxed">
+                  Per the 2006 IAU resolution, a dwarf planet (1) orbits the Sun, (2) has sufficient mass for self-gravity to achieve hydrostatic equilibrium (nearly round shape), and (3) has <em>not</em> cleared its orbital neighborhood (residing in the Asteroid or Kuiper Belts).
+                </p>
+              </div>
+              <div class="mt-5 pt-4 border-t border-slate-800/90 text-xs text-slate-400 space-y-1">
+                <div><strong class="text-slate-200">Telescopic View:</strong> Indistinguishable from faint background stars; identified by tracking their night-to-night proper motion against star charts.</div>
+              </div>
+            </article>
+          </div>
+
+          <!-- How to Identify Planets in the Night Sky Callout -->
+          <div class="mt-6 glass-card rounded-2xl p-6 border-l-4 border-l-sky-400">
+            <h4 class="text-base font-bold text-white mb-3 flex items-center gap-2">
+              <svg class="w-5 h-5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              Field Identification: How to Tell a Planet Apart from a Star
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+              <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
+                <div class="font-semibold text-sky-300">1. Steady, Non-Twinkling Light</div>
+                <p class="text-slate-300 text-xs mt-1 leading-relaxed">Stars are distant point sources whose light is refracted erratically by atmospheric turbulence (scintillation). Planets present finite angular discs (arcseconds wide), averaging out turbulence into a steady glow.</p>
+              </div>
+              <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
+                <div class="font-semibold text-sky-300">2. Alignment Along the Ecliptic</div>
+                <p class="text-slate-300 text-xs mt-1 leading-relaxed">Because the solar system formed from a flattened protoplanetary disc, all naked-eye planets travel within a narrow band across the sky passing through the 12 zodiac constellations.</p>
+              </div>
+              <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
+                <div class="font-semibold text-sky-300">3. Apparent Retrograde Loops</div>
+                <p class="text-slate-300 text-xs mt-1 leading-relaxed">Unlike fixed stars, planets wander eastward night after night, periodically reversing direction westward (retrograde motion) when Earth overtakes an outer planet near opposition.</p>
+              </div>
+              <div class="bg-slate-900/70 p-3.5 rounded-xl border border-slate-800">
+                <div class="font-semibold text-sky-300">4. High Brightness &amp; Hue</div>
+                <p class="text-slate-300 text-xs mt-1 leading-relaxed">Venus (mag -4.6) and Jupiter (mag -2.9) outshine Sirius, the brightest star (-1.46). Mars shows a distinct rusty ochre hue, while Saturn shines creamy gold.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 1.2 STARS ==================== -->
+        <div id="stars" class="mb-20">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-amber-300"></span>
+              1.2 Stellar Classification: Morgan–Keenan (MK) System
+            </h3>
+            <p class="text-slate-400 text-sm mt-1">
+              Stars are classified two-dimensionally by <strong class="text-slate-200">Spectral Type</strong> (surface photosphere temperature &amp; absorption lines: <em>O B A F G K M</em>) and <strong class="text-slate-200">Luminosity Class</strong> (surface gravity &amp; radius: Roman numerals <em>I</em> through <em>VII</em>).
+            </p>
+          </div>
+
+          <!-- Pure CSS Spectral Color Temperature Bar -->
+          <div class="glass-card rounded-2xl p-6 mb-6">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-mono uppercase tracking-wider text-slate-300">Harvard Spectral Sequence &amp; Wien's Peak Wavelength</span>
+              <span class="text-xs font-mono text-sky-400">Mnemonic: "Oh Be A Fine Girl/Guy, Kiss Me"</span>
+            </div>
+            <div class="spectral-bar h-5 w-full rounded-full mb-3"></div>
+            <div class="grid grid-cols-7 text-center font-mono text-xs">
+              <div>
+                <div class="font-bold text-blue-300 text-sm">O</div>
+                <div class="text-slate-400 text-[11px]">&gt;30,000 K</div>
+              </div>
+              <div>
+                <div class="font-bold text-blue-200 text-sm">B</div>
+                <div class="text-slate-400 text-[11px]">10k–30k K</div>
+              </div>
+              <div>
+                <div class="font-bold text-indigo-100 text-sm">A</div>
+                <div class="text-slate-400 text-[11px]">7.5k–10k K</div>
+              </div>
+              <div>
+                <div class="font-bold text-white text-sm">F</div>
+                <div class="text-slate-400 text-[11px]">6k–7.5k K</div>
+              </div>
+              <div>
+                <div class="font-bold text-amber-200 text-sm">G</div>
+                <div class="text-slate-400 text-[11px]">5.2k–6k K</div>
+              </div>
+              <div>
+                <div class="font-bold text-orange-300 text-sm">K</div>
+                <div class="text-slate-400 text-[11px]">3.7k–5.2k K</div>
+              </div>
+              <div>
+                <div class="font-bold text-red-400 text-sm">M</div>
+                <div class="text-slate-400 text-[11px]">2.4k–3.7k K</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spectral Types Table -->
+          <div class="glass-card rounded-2xl overflow-hidden mb-6">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-sm">
+                <thead>
+                  <tr class="border-b border-slate-800 bg-slate-900/80 text-xs font-mono uppercase text-slate-400">
+                    <th class="py-3.5 px-4">Class</th>
+                    <th class="py-3.5 px-4">Effective Temp</th>
+                    <th class="py-3.5 px-4">Chromaticity</th>
+                    <th class="py-3.5 px-4">Dominant Spectral Absorption Lines</th>
+                    <th class="py-3.5 px-4">Notable Naked-Eye Examples</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800/70 text-slate-300">
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="py-3 px-4 font-mono font-bold text-blue-300">O</td>
+                    <td class="py-3 px-4 font-mono text-xs">&ge; 30,000 K</td>
+                    <td class="py-3 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-400 mr-2"></span>Blue-Violet</td>
+                    <td class="py-3 px-4 text-xs">Ionized helium (He II), multiply ionized O III, N III, Si IV; weak hydrogen</td>
+                    <td class="py-3 px-4 text-xs">Alnitak (ζ Ori), Naos (ζ Pup)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="py-3 px-4 font-mono font-bold text-blue-200">B</td>
+                    <td class="py-3 px-4 font-mono text-xs">10,000 – 30,000 K</td>
+                    <td class="py-3 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-blue-200 mr-2"></span>Blue-White</td>
+                    <td class="py-3 px-4 text-xs">Neutral helium (He I) strongest at B2; strengthening hydrogen Balmer series</td>
+                    <td class="py-3 px-4 text-xs">Rigel (β Ori), Spica (α Vir)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="py-3 px-4 font-mono font-bold text-slate-100">A</td>
+                    <td class="py-3 px-4 font-mono text-xs">7,500 – 10,000 K</td>
+                    <td class="py-3 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-slate-100 mr-2"></span>Crisp White</td>
+                    <td class="py-3 px-4 text-xs">Hydrogen Balmer lines at maximum intensity; ionized metals (Ca II, Mg II)</td>
+                    <td class="py-3 px-4 text-xs">Sirius (α CMa), Vega (α Lyr)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="py-3 px-4 font-mono font-bold text-yellow-100">F</td>
+                    <td class="py-3 px-4 font-mono text-xs">6,000 – 7,500 K</td>
+                    <td class="py-3 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-yellow-100 mr-2"></span>Yellow-White</td>
+                    <td class="py-3 px-4 text-xs">Weakening hydrogen; strengthening ionized calcium (Ca II H &amp; K) and Fe I</td>
+                    <td class="py-3 px-4 text-xs">Procyon (α CMi), Polaris (α UMi)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="py-3 px-4 font-mono font-bold text-amber-200">G</td>
+                    <td class="py-3 px-4 font-mono text-xs">5,200 – 6,000 K</td>
+                    <td class="py-3 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-300 mr-2"></span>Yellow</td>
+                    <td class="py-3 px-4 text-xs">Prominent Ca II H &amp; K lines; neutral iron and metallic absorption bands</td>
+                    <td class="py-3 px-4 text-xs">The Sun (G2V), Capella (α Aur)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="py-3 px-4 font-mono font-bold text-orange-300">K</td>
+                    <td class="py-3 px-4 font-mono text-xs">3,700 – 5,200 K</td>
+                    <td class="py-3 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-orange-400 mr-2"></span>Light Orange</td>
+                    <td class="py-3 px-4 text-xs">Dense neutral metal lines; emerging CH and CN molecular bands</td>
+                    <td class="py-3 px-4 text-xs">Arcturus (α Boo), Aldebaran (α Tau)</td>
+                  </tr>
+                  <tr class="hover:bg-white/[0.02]">
+                    <td class="py-3 px-4 font-mono font-bold text-red-400">M</td>
+                    <td class="py-3 px-4 font-mono text-xs">2,400 – 3,700 K</td>
+                    <td class="py-3 px-4"><span class="inline-block w-2.5 h-2.5 rounded-full bg-red-500 mr-2"></span>Orange-Red</td>
+                    <td class="py-3 px-4 text-xs">Broad molecular absorption bands of Titanium Oxide (TiO) and neutral metals</td>
+                    <td class="py-3 px-4 text-xs">Betelgeuse (α Ori), Antares (α Sco)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Luminosity Classes & Visual Star Identification -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div class="glass-card rounded-2xl p-6">
+              <h4 class="text-base font-bold text-white mb-3">Yerkes Luminosity Classes (H-R Diagram Regions)</h4>
+              <ul class="space-y-2.5 text-sm text-slate-300">
+                <li class="flex items-start gap-3">
+                  <span class="font-mono text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30 mt-0.5">Ia / Ib</span>
+                  <div><strong class="text-white">Supergiants:</strong> Massive evolved stars with vast radii (up to 1,000+ R☉) and narrow spectral lines due to low atmospheric pressure (e.g., Betelgeuse M1Ia, Rigel B8Ia).</div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="font-mono text-xs px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 mt-0.5">III</span>
+                  <div><strong class="text-white">Normal Giants:</strong> Post-main-sequence stars burning helium in their cores or hydrogen in shells (e.g., Arcturus K1.5III, Aldebaran K5III).</div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="font-mono text-xs px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30 mt-0.5">V</span>
+                  <div><strong class="text-white">Main Sequence (Dwarfs):</strong> Hydrostatic stars fusing core hydrogen via the proton-proton chain or CNO cycle (e.g., Sun G2V, Sirius A1V).</div>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="font-mono text-xs px-2 py-0.5 rounded bg-slate-500/20 text-slate-300 border border-slate-500/30 mt-0.5">VII (D)</span>
+                  <div><strong class="text-white">White Dwarfs:</strong> Electron-degenerate stellar remnants of low/intermediate-mass stars (e.g., Sirius B, Procyon B).</div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6">
+              <h4 class="text-base font-bold text-white mb-3">Observational Star Identification Techniques</h4>
+              <div class="space-y-3 text-sm text-slate-300">
+                <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+                  <strong class="text-amber-300">Naked-Eye Color Contrast:</strong> Compare winter stars in Orion—icy blue-white Rigel (B-class) vs. fiery amber Betelgeuse (M-class). Defocusing a telescope slightly spreads starlight into a disc, intensifying subtle hues.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+                  <strong class="text-amber-300">Atmospheric Scintillation:</strong> Stars near the horizon pass through higher airmass, causing rapid chromatic flashing (red/blue dispersion)—most famously seen in low-altitude Sirius.
+                </div>
+                <div class="p-3 rounded-xl bg-slate-900/70 border border-slate-800">
+                  <strong class="text-amber-300">Visual Double &amp; Binary Splitting:</strong> Over half of star systems are multiples. Classics like <em>Albireo</em> (β Cygni) split in small scopes into a sapphire-blue (B8) and topaz-gold (K3) pair.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 1.3 NEBULAE ==================== -->
+        <div id="nebulae" class="mb-20">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+              1.3 Nebulae: Interstellar Clouds &amp; Stellar Remnants
+            </h3>
+            <p class="text-slate-400 text-sm mt-1">Vast clouds of ionized gas, neutral hydrogen, and cosmic dust categorized by how they emit, scatter, or obscure light.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Emission Nebulae -->
+            <div class="glass-card rounded-2xl p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-mono px-2.5 py-1 rounded bg-rose-500/15 text-rose-300 border border-rose-500/30">EMISSION (H II REGION)</span>
+                <span class="text-xs font-mono text-slate-400">e.g., Orion M42</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">Ionized Star-Forming Nurseries</h4>
+              <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                Ultraviolet photons from young, hot O and B stars strip electrons from surrounding hydrogen gas. As electrons recombine, they emit photons at discrete wavelengths—chiefly Hydrogen-alpha (656.3 nm, crimson) and doubly ionized oxygen [O III] (500.7 nm, teal-green).
+              </p>
+              <div class="mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400">
+                <strong class="text-rose-300">Visual ID:</strong> Appears ghostly green-gray to dark-adapted eyes (which peak near 507 nm). Responds dramatically to <strong>UHC</strong> and <strong>O-III narrowband filters</strong>.
+              </div>
+            </div>
+
+            <!-- Reflection Nebulae -->
+            <div class="glass-card rounded-2xl p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-mono px-2.5 py-1 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30">REFLECTION NEBULA</span>
+                <span class="text-xs font-mono text-slate-400">e.g., Merope / Pleiades</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">Dust-Scattered Starlight</h4>
+              <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                Clouds of microscopic carbon and silicate dust grains near cooler stars (B-type or later) that lack sufficient UV energy to ionize gas. Instead, dust scatters starlight via Rayleigh/Mie scattering—scattering shorter blue wavelengths far more efficiently than red.
+              </p>
+              <div class="mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400">
+                <strong class="text-sky-300">Visual ID:</strong> Soft, hazy glow surrounding bright stars (like M45). Narrowband emission filters block continuum starlight and make reflection nebulae disappear.
+              </div>
+            </div>
+
+            <!-- Dark Nebulae -->
+            <div class="glass-card rounded-2xl p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-mono px-2.5 py-1 rounded bg-slate-500/20 text-slate-300 border border-slate-500/40">DARK / ABSORPTION</span>
+                <span class="text-xs font-mono text-slate-400">e.g., Barnard 33, Coalsack</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">Dense Molecular Clouds</h4>
+              <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                Cold (10–20 K), dense concentrations of molecular hydrogen (H₂) and dust grains that block visible background starlight via interstellar extinction, silhouetting against rich Milky Way star fields or bright emission nebulae.
+              </p>
+              <div class="mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400">
+                <strong class="text-slate-200">Visual ID:</strong> Look for sharp "voids" or ink-black rifts (such as the Cygnus Rift) devoid of stars under dark skies using low-magnification wide fields.
+              </div>
+            </div>
+
+            <!-- Planetary Nebulae -->
+            <div class="glass-card rounded-2xl p-6">
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-mono px-2.5 py-1 rounded bg-teal-500/15 text-teal-300 border border-teal-500/30">PLANETARY NEBULA</span>
+                <span class="text-xs font-mono text-slate-400">e.g., Ring Nebula M57</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">Asymptotic Giant Branch Shells</h4>
+              <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                Unrelated to planets (named by William Herschel for their round, Uranus-like discs). Formed when low-to-intermediate mass stars (1–8 M☉) shed their outer envelopes, which are ionized by the exposed, ultra-hot white dwarf core.
+              </p>
+              <div class="mt-4 pt-3 border-t border-slate-800 text-xs text-slate-400">
+                <strong class="text-teal-300">Visual ID:</strong> Compact, high-surface-brightness rings or discs that tolerate high magnification and blink vividly when passing an O-III filter over the eyepiece.
+              </div>
+            </div>
+
+            <!-- Supernova Remnants -->
+            <div class="glass-card rounded-2xl p-6 md:col-span-2 lg:col-span-2">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <span class="text-xs font-mono px-2.5 py-1 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">SUPERNOVA REMNANT (SNR)</span>
+                <span class="text-xs font-mono text-slate-400">e.g., Crab Nebula M1, Veil Nebula NGC 6960</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">Relativistic Shockwaves &amp; Expanding Ejecta</h4>
+              <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+                The expanding shock front of a cataclysmic core-collapse (Type II) or thermonuclear white dwarf (Type Ia) explosion. Relativistic electrons spiraling in magnetic fields generate synchrotron continuum radiation alongside shock-heated filaments of sulfur, oxygen, and hydrogen.
+              </p>
+              <div class="mt-4 pt-3 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-400">
+                <div><strong class="text-purple-300">Averted Vision Technique:</strong> Look slightly off-center from the eyepiece field; this shifts faint light off the cone-dense fovea onto the ultra-sensitive peripheral rod cells of the retina.</div>
+                <div><strong class="text-purple-300">Filter Response:</strong> Filamentary SNRs like the Veil Nebula leap out of dark skies with an O-III filter, while synchrotron cores like M1 require aperture and dark skies.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== 1.4 GALAXIES ==================== -->
+        <div id="galaxies">
+          <div class="mb-6">
+            <h3 class="text-2xl font-bold text-white flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+              1.4 Galaxies: The Hubble Morphological Sequence
+            </h3>
+            <p class="text-slate-400 text-sm mt-1">Gravitationally bound island universes of stars, gas, and dark matter organized along Edwin Hubble's "Tuning Fork" diagram.</p>
+          </div>
+
+          <!-- Pure CSS Hubble Tuning Fork Visual Diagram -->
+          <div class="glass-card rounded-2xl p-6 mb-6">
+            <div class="text-xs font-mono uppercase tracking-wider text-emerald-400 mb-4">Morphological Schematic // Hubble Tuning Fork</div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+              <!-- Ellipticals -->
+              <div class="lg:col-span-4 bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-mono text-xs font-bold text-amber-300">ELLIPTICALS (E0 &rarr; E7)</span>
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-4 h-4 rounded-full bg-amber-200/80 shadow shadow-amber-300/50"></span>
+                    <span class="w-6 h-3 rounded-full bg-amber-200/80 shadow shadow-amber-300/50"></span>
+                  </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                  Smooth, featureless ellipsoidal profiles categorized by apparent ellipticity <code class="text-amber-200">n = 10(1 - b/a)</code> from spherical <strong>E0</strong> to elongated <strong>E7</strong>. Dominated by older, metal-poor Population II stars with little cold gas or active star formation. (e.g., Messier 87).
+                </p>
+              </div>
+
+              <!-- Lenticular Bridge -->
+              <div class="lg:col-span-3 bg-slate-900/80 border border-slate-800 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-mono text-xs font-bold text-sky-300">LENTICULAR (S0)</span>
+                  <div class="w-7 h-2.5 rounded-full bg-sky-200/80 relative flex items-center justify-center">
+                    <span class="w-3 h-3 rounded-full bg-white"></span>
+                  </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                  Transitional "lens-shaped" galaxies possessing a bright central bulge and an extended stellar disc like spirals, but having exhausted their interstellar gas, they lack distinct spiral arms.
+                </p>
+              </div>
+
+              <!-- Spirals & Barred Spirals Fork -->
+              <div class="lg:col-span-5 space-y-3">
+                <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
+                  <div class="flex items-center justify-between">
+                    <span class="font-mono text-xs font-bold text-purple-300">UNBARRED SPIRALS (Sa &rarr; Sb &rarr; Sc)</span>
+                    <span class="text-[11px] font-mono text-slate-400">e.g., Andromeda M31 (Sb)</span>
+                  </div>
+                  <p class="text-xs text-slate-300 mt-1">
+                    Tightly wound arms and large bulges (<strong>Sa</strong>) progress to loosely wound, patchy star-forming arms and smaller cores (<strong>Sc</strong>).
+                  </p>
+                </div>
+                <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-3.5">
+                  <div class="flex items-center justify-between">
+                    <span class="font-mono text-xs font-bold text-emerald-300">BARRED SPIRALS (SBa &rarr; SBb &rarr; SBc)</span>
+                    <span class="text-[11px] font-mono text-slate-400">e.g., Milky Way (SBbc)</span>
+                  </div>
+                  <p class="text-xs text-slate-300 mt-1">
+                    Feature a central linear bar of stars funneling gas inward; spiral arms emerge from the ends of the bar rather than the nucleus.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Irregulars & Identification Row -->
+            <div class="mt-4 pt-4 border-t border-slate-800/80 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800/80">
+                <strong class="text-emerald-300 font-mono uppercase">Irregular Galaxies (Irr I / Irr II):</strong>
+                <span class="text-slate-300 ml-1">Lack rotational symmetry or central bulges, often distorted by tidal interactions and rich in young blue stars and H II regions (e.g., Large &amp; Small Magellanic Clouds, Messier 82).</span>
+              </div>
+              <div class="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800/80">
+                <strong class="text-sky-300 font-mono uppercase">Visual Identification Clues:</strong>
+                <span class="text-slate-300 ml-1">Found predominantly away from the dusty Milky Way plane (the "Zone of Avoidance"). Through eyepieces, they appear as soft, oval smudges with a bright stellar-like core fading into a diffuse halo; edge-on spirals show dark dust lanes.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 2: OPTICS — TELESCOPES & BINOCULARS ==================== -->
+    <section id="optics" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-800/70 bg-slate-950/35">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl mb-14">
+          <span class="font-mono text-xs uppercase tracking-widest text-purple-400">Section 02 // Astronomical Instrumentation</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Optics: Telescopes &amp; Binoculars</h2>
+          <p class="text-slate-300 mt-3 text-base leading-relaxed">
+            A telescope's primary mission is not magnification—it is <strong class="text-white">light-gathering power</strong>, proportional to the square of its aperture diameter (<span class="font-mono text-sky-300">A = &pi;(D/2)&sup2;</span>). Larger apertures collect fainter photons and improve angular resolution (Rayleigh limit).
+          </p>
+        </div>
+
+        <!-- Core Optical Formulas Bar -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          <div class="glass-card rounded-2xl p-5">
+            <div class="text-xs font-mono text-sky-400">APERTURE (D)</div>
+            <div class="text-lg font-bold text-white mt-1">Light &amp; Resolution</div>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Diameter of the primary lens or mirror (in mm or inches). Doubling aperture collects <strong>4&times;</strong> more light and doubles resolving power (<span class="font-mono text-sky-200">&theta; &approx; 116"/D_mm</span>).</p>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <div class="text-xs font-mono text-purple-400">FOCAL RATIO (f/#)</div>
+            <div class="text-lg font-bold text-white mt-1 font-mono">f/ = F_obj / D</div>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Ratio of focal length to aperture. "Fast" scopes (<strong>f/4–f/5</strong>) give wide fields; "slow" scopes (<strong>f/10–f/15</strong>) yield narrow, high-power planetary views.</p>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <div class="text-xs font-mono text-emerald-400">MAGNIFICATION (M)</div>
+            <div class="text-lg font-bold text-white mt-1 font-mono">M = F_obj / F_eye</div>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Determined by dividing telescope focal length by eyepiece focal length. Maximum useful power is ~<strong>2&times; per mm</strong> of aperture (e.g., 200x for a 100mm scope).</p>
+          </div>
+          <div class="glass-card rounded-2xl p-5">
+            <div class="text-xs font-mono text-amber-300">EXIT PUPIL (EP)</div>
+            <div class="text-lg font-bold text-white mt-1 font-mono">EP = D / M</div>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">Diameter of the light beam exiting the eyepiece. Keep EP &le; <strong>7mm</strong> (the dilated human pupil) so no collected light is wasted on your iris.</p>
+          </div>
+        </div>
+
+        <!-- 2.1 Telescope Optical Designs -->
+        <h3 class="text-2xl font-bold text-white mb-6">2.1 Primary Telescope Optical Designs</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-16">
+          <!-- Refractor -->
+          <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-sky-500/15 text-sky-300 border border-sky-500/30">DIOPTRIC // LENS</span>
+                <span class="text-xs font-mono text-slate-400">Sealed Tube</span>
+              </div>
+              <h4 class="text-xl font-bold text-white">Refractor Telescopes</h4>
+              <p class="text-sm text-slate-300 mt-2.5 leading-relaxed">
+                Uses a front objective lens assembly to bend (refract) light to a rear focal point. Because there is no central secondary mirror obstructing the light path, refractors deliver razor-sharp, high-contrast images.
+              </p>
+              <div class="mt-4 space-y-2 text-xs text-slate-300 bg-slate-900/75 p-3.5 rounded-xl border border-slate-800">
+                <div><strong class="text-sky-300">Achromatic (2-element):</strong> Brings red and blue wavelengths to a common focus; affordable, though bright targets show faint violet chromatic aberration ("fringing").</div>
+                <div><strong class="text-sky-300">Apochromatic / ED (3-element):</strong> Uses extra-low dispersion fluorite/ED glass to focus R, G, and B wavelengths identically—color-free perfection for planetary work and astrophotography.</div>
+              </div>
+            </div>
+            <div class="mt-5 pt-4 border-t border-slate-800 text-xs flex justify-between text-slate-400">
+              <span><strong class="text-emerald-400">Best For:</strong> Moon, planets, double stars</span>
+              <span><strong class="text-rose-400">Con:</strong> High cost per inch</span>
+            </div>
+          </div>
+
+          <!-- Reflector -->
+          <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-purple-500/15 text-purple-300 border border-purple-500/30">CATOPTRIC // MIRROR</span>
+                <span class="text-xs font-mono text-slate-400">Open Tube</span>
+              </div>
+              <h4 class="text-xl font-bold text-white">Newtonian &amp; Dobsonian Reflectors</h4>
+              <p class="text-sm text-slate-300 mt-2.5 leading-relaxed">
+                Invented by Isaac Newton, this design uses a parabolic primary mirror at the base of the tube to reflect light up to a flat 45° diagonal secondary mirror, directing focus out the upper side. Completely free of chromatic aberration.
+              </p>
+              <div class="mt-4 space-y-2 text-xs text-slate-300 bg-slate-900/75 p-3.5 rounded-xl border border-slate-800">
+                <div><strong class="text-purple-300">Dobsonian Mount:</strong> Places a large Newtonian tube (6" to 16"+) on a simple, ultra-stable lazy-Susan alt-azimuth rocker box, maximizing aperture per dollar.</div>
+                <div><strong class="text-purple-300">Maintenance:</strong> Requires periodic optical alignment (collimation) of the mirrors and suffers slight off-axis coma in fast f/4–f/5 systems.</div>
+              </div>
+            </div>
+            <div class="mt-5 pt-4 border-t border-slate-800 text-xs flex justify-between text-slate-400">
+              <span><strong class="text-emerald-400">Best For:</strong> Faint nebulae &amp; galaxies</span>
+              <span><strong class="text-rose-400">Con:</strong> Bulky tube size</span>
+            </div>
+          </div>
+
+          <!-- Catadioptric -->
+          <div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-amber-500/15 text-amber-300 border border-amber-500/30">CATADIOPTRIC // HYBRID</span>
+                <span class="text-xs font-mono text-slate-400">Folded Path</span>
+              </div>
+              <h4 class="text-xl font-bold text-white">Schmidt &amp; Maksutov-Cassegrains</h4>
+              <p class="text-sm text-slate-300 mt-2.5 leading-relaxed">
+                Combines a full-aperture front corrector lens with spherical mirrors to "fold" a long focal length into a remarkably short, portable optical tube assembly (OTA) with rear eyepiece viewing.
+              </p>
+              <div class="mt-4 space-y-2 text-xs text-slate-300 bg-slate-900/75 p-3.5 rounded-xl border border-slate-800">
+                <div><strong class="text-amber-300">Schmidt-Cassegrain (SCT):</strong> Uses a thin aspheric corrector plate (typically f/10). The ultimate all-purpose, GoTo-friendly observatory and travel instrument.</div>
+                <div><strong class="text-amber-300">Maksutov-Cassegrain (Mak):</strong> Uses a thick meniscus lens (f/12–f/15) with a tiny secondary spot, delivering refractor-like contrast for planets in a backpack-sized tube.</div>
+              </div>
+            </div>
+            <div class="mt-5 pt-4 border-t border-slate-800 text-xs flex justify-between text-slate-400">
+              <span><strong class="text-emerald-400">Best For:</strong> Portability &amp; versatility</span>
+              <span><strong class="text-rose-400">Con:</strong> Slower thermal cooldown</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.2 Binocular Astronomy -->
+        <div class="glass-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+            <div>
+              <h3 class="text-2xl font-bold text-white">2.2 Astronomical Binoculars: Prism Designs &amp; Spec Decoding</h3>
+              <p class="text-slate-300 text-sm mt-1">
+                Two-eyed viewing provides stereoscopic brain processing, wider true fields of view (5°–7°), and upright, un-mirrored images that match star charts effortlessly.
+              </p>
+            </div>
+            <div class="bg-slate-900 border border-sky-500/30 rounded-xl px-4 py-2.5 font-mono text-xs text-sky-300 shrink-0">
+              Format: <span class="text-white font-bold">10&times;50</span> = 10x Mag &bull; 50mm Lenses
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+            <!-- Prism Comparison -->
+            <div class="lg:col-span-5 space-y-4">
+              <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-white text-sm">Porro Prism Binoculars (Classic Z-Shape)</h4>
+                  <span class="text-[11px] font-mono text-emerald-400">Recommended for Astro</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                  Offset objective barrels use internal reflection without phase-shift losses. Delivers higher light transmission per dollar, wider depth perception, and superior contrast on faint star clouds (look for <strong>BaK-4</strong> prism glass over cheaper BK-7).
+                </p>
+              </div>
+              <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between">
+                  <h4 class="font-bold text-white text-sm">Roof Prism Binoculars (Straight H-Shape)</h4>
+                  <span class="text-[11px] font-mono text-slate-400">Compact &amp; Rugged</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                  Aligned barrels make them lighter and waterproof, though internal beam-splitting requires expensive dielectric and phase-correction coatings to match Porro contrast on night-sky targets.
+                </p>
+              </div>
+            </div>
+
+            <!-- Binocular Configurations Table -->
+            <div class="lg:col-span-7 overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr class="border-b border-slate-800 text-slate-400 font-mono uppercase text-xs">
+                    <th class="py-2.5 px-3">Spec</th>
+                    <th class="py-2.5 px-3">Exit Pupil</th>
+                    <th class="py-2.5 px-3">Mounting</th>
+                    <th class="py-2.5 px-3">Ideal Celestial Targets</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-800/70 text-slate-300">
+                  <tr>
+                    <td class="py-3 px-3 font-mono font-bold text-sky-300">7&times;50</td>
+                    <td class="py-3 px-3 font-mono">7.1 mm</td>
+                    <td class="py-3 px-3">Handheld</td>
+                    <td class="py-3 px-3">Ultra-bright sweeping of Milky Way dust lanes under Bortle 1–3 dark skies (best for younger eyes with 7mm dilation).</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-3 font-mono font-bold text-sky-300">10&times;50</td>
+                    <td class="py-3 px-3 font-mono">5.0 mm</td>
+                    <td class="py-3 px-3">Handheld</td>
+                    <td class="py-3 px-3"><strong>The Gold Standard:</strong> Darker sky background contrast; resolves Pleiades, Beehive (M44), Andromeda (M31), and lunar craters.</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 px-3 font-mono font-bold text-purple-300">15&times;70 / 20&times;80</td>
+                    <td class="py-3 px-3 font-mono">4.7 / 4.0 mm</td>
+                    <td class="py-3 px-3">Tripod Required</td>
+                    <td class="py-3 px-3">Giant binoculars collecting 2&times; the light of 50mm models; reveals Jupiter's moons, Lagoon Nebula (M8), and globular clusters.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 3: CELESTIAL COORDINATES ==================== -->
+    <section id="coordinates" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-800/70">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl mb-14">
+          <span class="font-mono text-xs uppercase tracking-widest text-sky-400">Section 03 // Spherical Astronomy</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Celestial Coordinates &amp; Sky Navigation</h2>
+          <p class="text-slate-300 mt-3 text-base leading-relaxed">
+            To catalog billions of objects and aim telescopes accurately, astronomers project Earth's geographic grid onto the imaginary <strong class="text-white">Celestial Sphere</strong>, utilizing both observer-independent and horizon-based coordinate frames.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Equatorial Coordinate System -->
+          <div class="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-sky-500/15 text-sky-300 border border-sky-500/30">GLOBAL // STAR-FIXED</span>
+              <span class="font-mono text-xs text-slate-400">Epoch J2000.0</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white">Equatorial Coordinate System (RA / Dec)</h3>
+            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+              Projects Earth's Equator and Poles onto the sky. Because this grid rotates along with the celestial sphere, a star's coordinates remain fixed regardless of your location or time of night (slowly shifting over decades only due to axial precession).
+            </p>
+
+            <div class="mt-6 space-y-4">
+              <div class="bg-slate-900/85 p-4 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-sky-300">Right Ascension (RA / &alpha;) &mdash; Celestial Longitude</span>
+                  <span class="font-mono text-xs text-slate-400">0h to 24h</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                  Measured <strong>eastward</strong> in hours, minutes, and seconds (<span class="font-mono text-sky-200">1h = 15&deg;</span> of Earth rotation) starting from <span class="font-mono">0h 00m</span>—the <strong>Vernal Equinox</strong> (the First Point of Aries, where the Sun crosses the Celestial Equator heading north).
+                </p>
+              </div>
+
+              <div class="bg-slate-900/85 p-4 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-sky-300">Declination (Dec / &delta;) &mdash; Celestial Latitude</span>
+                  <span class="font-mono text-xs text-slate-400">-90&deg; to +90&deg;</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                  Measured in degrees, arcminutes ('), and arcseconds (") north (<strong>+</strong>) or south (<strong>&minus;</strong>) of the Celestial Equator (<span class="font-mono">0&deg;</span>). The North Celestial Pole is <span class="font-mono">+90&deg;</span> (near Polaris at +89&deg; 15'); the South Celestial Pole is <span class="font-mono">-90&deg;</span>.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-5 p-3.5 rounded-xl bg-sky-500/10 border border-sky-500/25 text-xs font-mono text-sky-200">
+              Example Catalog Entry &bull; Orion Nebula (M42): RA 05h 35m 17s | Dec -05&deg; 23' 28"
+            </div>
+          </div>
+
+          <!-- Horizontal (Alt-Az) Coordinate System -->
+          <div class="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full text-xs font-mono bg-purple-500/15 text-purple-300 border border-purple-500/30">LOCAL // OBSERVER-FIXED</span>
+              <span class="font-mono text-xs text-slate-400">Horizon Frame</span>
+            </div>
+            <h3 class="text-2xl font-bold text-white">Horizontal Coordinate System (Alt-Az)</h3>
+            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+              Anchored directly to the observer's local horizon and zenith (directly overhead). Intuitive for pointing Dobsonian telescopes and binoculars in real time, though coordinates constantly change as Earth rotates.
+            </p>
+
+            <div class="mt-6 space-y-4">
+              <div class="bg-slate-900/85 p-4 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-purple-300">Azimuth (Az) &mdash; Compass Bearing</span>
+                  <span class="font-mono text-xs text-slate-400">0&deg; to 360&deg;</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                  Measured clockwise along the horizon starting from True North: <strong>0&deg; = North</strong>, <strong>90&deg; = East</strong>, <strong>180&deg; = South</strong> (where objects culminate at highest altitude in the Northern Hemisphere), and <strong>270&deg; = West</strong>.
+                </p>
+              </div>
+
+              <div class="bg-slate-900/85 p-4 rounded-xl border border-slate-800">
+                <div class="flex items-center justify-between">
+                  <span class="font-bold text-purple-300">Altitude (Alt / Elevation) &mdash; Angle Above Horizon</span>
+                  <span class="font-mono text-xs text-slate-400">0&deg; to +90&deg;</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1.5 leading-relaxed">
+                  Angular height above the mathematical horizon (<span class="font-mono">0&deg;</span>) up to the <strong>Zenith</strong> (<span class="font-mono">+90&deg;</span>). Objects below <span class="font-mono">20&deg;</span> suffer heavy atmospheric extinction and turbulence; optimal observing occurs near the meridian at high altitude.
+                </p>
+              </div>
+            </div>
+
+            <!-- Latitude & Polaris Geometric Rule -->
+            <div class="mt-5 p-3.5 rounded-xl bg-purple-500/10 border border-purple-500/25 text-xs text-purple-200 leading-relaxed">
+              <strong class="font-mono text-white">LATITUDE RULE:</strong> In the Northern Hemisphere, the Altitude of the North Celestial Pole (Polaris) equals your geographic latitude (<span class="font-mono">Alt_Polaris &approx; &phi;_observer</span>). Stars within <span class="font-mono">&phi;</span> degrees of the pole never set—they are <em>circumpolar</em>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SECTION 4: PRACTICAL STARGAZING & STAR-HOPPING ==================== -->
+    <section id="stargazing" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-slate-800/70 bg-slate-950/40">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl mb-14">
+          <span class="font-mono text-xs uppercase tracking-widest text-emerald-400">Section 04 // Field Execution</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mt-2">Practical Stargazing &amp; Star-Hopping Guide</h2>
+          <p class="text-slate-300 mt-3 text-base leading-relaxed">
+            Mastering the night sky requires preparing human physiology for scotopic (low-light) vision, evaluating sky transparency, and using bright geometric asterisms as stepping stones to invisible deep-sky treasures.
+          </p>
+        </div>
+
+        <!-- Step-by-Step Field Preparation Protocol -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-16">
+          <div class="glass-card rounded-2xl p-6">
+            <div class="w-9 h-9 rounded-xl bg-sky-500/15 border border-sky-500/30 text-sky-300 font-mono font-bold flex items-center justify-center mb-4">01</div>
+            <h3 class="text-lg font-bold text-white">Check Bortle Scale &amp; Lunar Phase</h3>
+            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+              Plan deep-sky sessions within 5 days of <strong>New Moon</strong>, as moonlight washes out faint galaxies. Consult the <strong>Bortle Dark-Sky Scale</strong> (Class 1–9) to escape urban skyglow; even driving 30 miles out of a city dramatically boosts limiting magnitude.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6">
+            <div class="w-9 h-9 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 font-mono font-bold flex items-center justify-center mb-4">02</div>
+            <h3 class="text-lg font-bold text-white">Dark Adaptation &amp; Red Light</h3>
+            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+              Your eyes require <strong>20–30 minutes</strong> in total darkness to regenerate <em>rhodopsin</em> ("visual purple") in retinal rod cells, increasing sensitivity by over 10,000&times;. Use only dim <strong>650nm deep-red flashlights</strong>, which preserve rhodopsin while reading charts.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6">
+            <div class="w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-300 font-mono font-bold flex items-center justify-center mb-4">03</div>
+            <h3 class="text-lg font-bold text-white">Angular Measuring by Hand</h3>
+            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+              At arm's length, your hand is a calibrated angular ruler: your <strong>pinky tip = 1&deg;</strong> (twice the Full Moon's 0.5&deg; width), <strong>three middle fingers = 5&deg;</strong>, a <strong>clenched fist = 10&deg;</strong>, and an outstretched <strong>pinky-to-thumb span = 25&deg;</strong>.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6">
+            <div class="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 font-mono font-bold flex items-center justify-center mb-4">04</div>
+            <h3 class="text-lg font-bold text-white">Planispheres &amp; Low-Power Start</h3>
+            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+              Rotate a latitude-matched <strong>planisphere</strong> to match today's date and time to identify overhead constellations. Always start telescopic searches with your <strong>lowest-power (25mm–32mm) eyepiece</strong> and an aligned red-dot or optical finder scope.
+            </p>
+          </div>
+        </div>
+
+        <!-- Star-Hopping Visual Field Guide -->
+        <div class="glass-card rounded-2xl p-6 sm:p-8">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8">
+            <div>
+              <span class="font-mono text-xs uppercase tracking-wider text-sky-400">Celestial Geometry // Visual Vectoring</span>
+              <h3 class="text-2xl font-bold text-white mt-1">The Art of Star-Hopping: Anchor Asterisms &amp; Messier Hops</h3>
+              <p class="text-sm text-slate-300 mt-1 max-w-3xl">
+                Instead of relying on electronics, star-hopping uses bright, unmistakable star patterns (asterisms) to draw imaginary lines and triangles across the sky directly to deep-sky objects.
+              </p>
+            </div>
+          </div>
+
+          <!-- 4 Interactive/Visual Star-Hopping Vector Cards with Inline SVG Star Charts -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Hop 1: Big Dipper to Polaris & M81/M82 -->
+            <div class="bg-slate-900/85 rounded-2xl p-5 border border-slate-800 flex flex-col sm:flex-row gap-5 items-center">
+              <!-- Inline SVG Diagram -->
+              <div class="w-40 h-40 shrink-0 rounded-xl bg-[#050811] border border-slate-800/90 p-2 relative">
+                <svg viewBox="0 0 140 140" class="w-full h-full">
+                  <!-- Big Dipper Bowl & Handle -->
+                  <polyline points="15,95 35,88 55,92 72,96 74,116 98,114 96,93 72,96" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.6"/>
+                  <!-- Pointer Arrow from Merak (98,114) through Dubhe (96,93) to Polaris (92,22) -->
+                  <line x1="98" y1="114" x2="92" y2="28" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="3 3"/>
+                  <!-- Diagonal M81/M82 Hop -->
+                  <line x1="74" y1="116" x2="118" y2="70" stroke="#34d399" stroke-width="1.2" stroke-dasharray="2 2"/>
+                  <!-- Stars -->
+                  <circle cx="15" cy="95" r="2.2" fill="#fff"/>
+                  <circle cx="35" cy="88" r="2.2" fill="#fff"/>
+                  <circle cx="55" cy="92" r="2.2" fill="#fff"/>
+                  <circle cx="72" cy="96" r="2.2" fill="#fff"/>
+                  <circle cx="74" cy="116" r="2.2" fill="#fff"/>
+                  <circle cx="98" cy="114" r="2.6" fill="#38bdf8"/>
+                  <circle cx="96" cy="93" r="2.8" fill="#38bdf8"/>
+                  <!-- Polaris -->
+                  <circle cx="92" cy="22" r="3.4" fill="#fde047"/>
+                  <text x="52" y="18" fill="#fde047" font-size="8" font-family="monospace">Polaris</text>
+                  <!-- M81/M82 -->
+                  <ellipse cx="120" cy="68" rx="4" ry="2" transform="rotate(-35 120 68)" fill="#34d399"/>
+                  <text x="103" y="59" fill="#34d399" font-size="7.5" font-family="monospace">M81/82</text>
+                </svg>
+              </div>
+              <div>
+                <div class="text-xs font-mono text-sky-400">ANCHOR 01 // NORTHERN CIRCUMPOLAR</div>
+                <h4 class="text-base font-bold text-white mt-0.5">Ursa Major (Big Dipper) &rarr; Polaris &amp; M81/M82</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                  Extend a line through the two outer bowl stars, <strong>Merak</strong> and <strong>Dubhe</strong> ("The Pointers"), 5&times; their separation (~28&deg;) to hit <strong>Polaris</strong>. Extending a diagonal from Phecda through Dubhe by the same distance lands directly on Bode's Galaxy (<strong>M81</strong>) and the Cigar Galaxy (<strong>M82</strong>).
+                </p>
+              </div>
+            </div>
+
+            <!-- Hop 2: Cassiopeia to Andromeda M31 -->
+            <div class="bg-slate-900/85 rounded-2xl p-5 border border-slate-800 flex flex-col sm:flex-row gap-5 items-center">
+              <div class="w-40 h-40 shrink-0 rounded-xl bg-[#050811] border border-slate-800/90 p-2 relative">
+                <svg viewBox="0 0 140 140" class="w-full h-full">
+                  <!-- Cassiopeia W -->
+                  <polyline points="20,40 42,68 68,45 92,76 116,42" fill="none" stroke="#38bdf8" stroke-width="1.3" stroke-opacity="0.7"/>
+                  <!-- Schedar-Caph-Segin V bisector arrow to M31 -->
+                  <line x1="92" y1="76" x2="82" y2="118" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="3 3"/>
+                  <!-- Stars -->
+                  <circle cx="20" cy="40" r="2.3" fill="#fff"/>
+                  <circle cx="42" cy="68" r="2.3" fill="#fff"/>
+                  <circle cx="68" cy="45" r="2.3" fill="#fff"/>
+                  <circle cx="92" cy="76" r="2.8" fill="#fde047"/>
+                  <circle cx="116" cy="42" r="2.3" fill="#fff"/>
+                  <text x="74" y="83" fill="#fde047" font-size="7.5" font-family="monospace">Schedar</text>
+                  <!-- M31 Oval -->
+                  <ellipse cx="81" cy="122" rx="9" ry="3.5" transform="rotate(-25 81 122)" fill="#a855f7" fill-opacity="0.75"/>
+                  <text x="93" y="128" fill="#d8b4fe" font-size="8" font-family="monospace">M31</text>
+                </svg>
+              </div>
+              <div>
+                <div class="text-xs font-mono text-purple-400">ANCHOR 02 // AUTUMN / NORTHERN SKY</div>
+                <h4 class="text-base font-bold text-white mt-0.5">Cassiopeia's "W" &rarr; Andromeda Galaxy (M31)</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                  The sharper right-hand "V" of Cassiopeia's "W" (formed by Navi, <strong>Schedar</strong>, and Caph) acts like an arrowhead pointing southward. Follow that bisector ~15&deg; (1.5 fists) past Mirach to spot the <strong>Andromeda Galaxy (M31)</strong>—visible to the naked eye at 2.5 million light-years away.
+                </p>
+              </div>
+            </div>
+
+            <!-- Hop 3: Orion's Belt to Sirius, Aldebaran & M42 -->
+            <div class="bg-slate-900/85 rounded-2xl p-5 border border-slate-800 flex flex-col sm:flex-row gap-5 items-center">
+              <div class="w-40 h-40 shrink-0 rounded-xl bg-[#050811] border border-slate-800/90 p-2 relative">
+                <svg viewBox="0 0 140 140" class="w-full h-full">
+                  <!-- Orion Belt -->
+                  <line x1="60" y1="68" x2="80" y2="62" stroke="#38bdf8" stroke-width="1.5"/>
+                  <!-- Hop down-left to Sirius -->
+                  <line x1="80" y1="62" x2="118" y2="112" stroke="#38bdf8" stroke-width="1.3" stroke-dasharray="3 3"/>
+                  <!-- Hop up-right to Aldebaran -->
+                  <line x1="60" y1="68" x2="24" y2="24" stroke="#fb923c" stroke-width="1.3" stroke-dasharray="3 3"/>
+                  <!-- Belt Stars -->
+                  <circle cx="60" cy="68" r="2.4" fill="#fff"/>
+                  <circle cx="70" cy="65" r="2.4" fill="#fff"/>
+                  <circle cx="80" cy="62" r="2.4" fill="#fff"/>
+                  <!-- M42 Sword -->
+                  <circle cx="72" cy="80" r="3" fill="#f43f5e"/>
+                  <text x="48" y="88" fill="#fda4af" font-size="7.5" font-family="monospace">M42</text>
+                  <!-- Sirius -->
+                  <circle cx="120" cy="115" r="3.6" fill="#7dd3fc"/>
+                  <text x="86" y="126" fill="#7dd3fc" font-size="8" font-family="monospace">Sirius</text>
+                  <!-- Aldebaran -->
+                  <circle cx="22" cy="22" r="3" fill="#fb923c"/>
+                  <text x="28" y="21" fill="#fdba74" font-size="7.5" font-family="monospace">Aldebaran</text>
+                </svg>
+              </div>
+              <div>
+                <div class="text-xs font-mono text-amber-300">ANCHOR 03 // WINTER HEXAGON</div>
+                <h4 class="text-base font-bold text-white mt-0.5">Orion's Belt &rarr; M42, Sirius &amp; Pleiades (M45)</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                  Directly beneath Alnilam (center belt star) hangs Orion's Sword, housing the <strong>Orion Nebula (M42)</strong>. Extending the belt southeast ~20&deg; points straight to blazing <strong>Sirius</strong>; extending it northwest ~20&deg; hits orange <strong>Aldebaran</strong> in Taurus and continues to the <strong>Pleiades (M45)</strong>.
+                </p>
+              </div>
+            </div>
+
+            <!-- Hop 4: Summer Triangle to Ring Nebula M57 & Dumbbell M27 -->
+            <div class="bg-slate-900/85 rounded-2xl p-5 border border-slate-800 flex flex-col sm:flex-row gap-5 items-center">
+              <div class="w-40 h-40 shrink-0 rounded-xl bg-[#050811] border border-slate-800/90 p-2 relative">
+                <svg viewBox="0 0 140 140" class="w-full h-full">
+                  <!-- Summer Triangle -->
+                  <polygon points="32,32 108,42 74,116" fill="none" stroke="#38bdf8" stroke-width="1.2" stroke-opacity="0.65"/>
+                  <!-- Stars -->
+                  <circle cx="32" cy="32" r="3.3" fill="#e0f2fe"/>
+                  <text x="14" y="25" fill="#e0f2fe" font-size="8" font-family="monospace">Vega</text>
+                  <circle cx="108" cy="42" r="3" fill="#fff"/>
+                  <text x="94" y="34" fill="#fff" font-size="8" font-family="monospace">Deneb</text>
+                  <circle cx="74" cy="116" r="3.1" fill="#fff"/>
+                  <text x="80" y="122" fill="#fff" font-size="8" font-family="monospace">Altair</text>
+                  <!-- M57 near Vega -->
+                  <circle cx="42" cy="54" r="2.5" fill="none" stroke="#2dd4bf" stroke-width="1.5"/>
+                  <text x="16" y="62" fill="#5eead4" font-size="7.5" font-family="monospace">M57</text>
+                  <!-- M27 inside triangle -->
+                  <circle cx="78" cy="84" r="2.8" fill="#a855f7"/>
+                  <text x="84" y="86" fill="#d8b4fe" font-size="7.5" font-family="monospace">M27</text>
+                </svg>
+              </div>
+              <div>
+                <div class="text-xs font-mono text-emerald-400">ANCHOR 04 // SUMMER MILKY WAY</div>
+                <h4 class="text-base font-bold text-white mt-0.5">Summer Triangle &rarr; Ring (M57) &amp; Dumbbell (M27)</h4>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+                  Formed by <strong>Vega</strong> (Lyra), <strong>Deneb</strong> (Cygnus), and <strong>Altair</strong> (Aquila), this vast asterism frames the summer Milky Way. Just 6&deg; south of Vega, midway between Sulafat and Sheliak, sits the <strong>Ring Nebula (M57)</strong>; two-thirds from Deneb toward Altair lies the bright <strong>Dumbbell Nebula (M27)</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-slate-800/80 bg-[#04060d] py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="text-center sm:text-left">
+        <div class="font-bold text-white tracking-wider text-sm">ASTRONOMIA // FIELD ATLAS</div>
+        <p class="text-xs text-slate-400 mt-1">
+          Clear skies, steady seeing, and dark horizons. Built with semantic HTML5, Tailwind CSS &amp; pure CSS diagrams.
+        </p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-4 text-xs font-mono text-slate-400">
+        <a href="#planets" class="hover:text-sky-400 transition">Planets</a>
+        <span>&bull;</span>
+        <a href="#stars" class="hover:text-sky-400 transition">MK Spectra</a>
+        <span>&bull;</span>
+        <a href="#nebulae" class="hover:text-sky-400 transition">Nebulae</a>
+        <span>&bull;</span>
+        <a href="#galaxies" class="hover:text-sky-400 transition">Galaxies</a>
+        <span>&bull;</span>
+        <a href="#optics" class="hover:text-sky-400 transition">Optics</a>
+        <span>&bull;</span>
+        <a href="#top" class="text-sky-400 hover:text-sky-300 transition">Back to Zenith &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Minimal Vanilla JS solely for Mobile Navigation Menu Toggle -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconOpen = document.getElementById('menu-icon-open');
+      const iconClose = document.getElementById('menu-icon-close');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+      function toggleMenu() {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden', !isHidden);
+        iconOpen.classList.toggle('hidden', isHidden);
+        iconClose.classList.toggle('hidden', !isHidden);
+      }
+
+      if (menuBtn) {
+        menuBtn.addEventListener('click', toggleMenu);
+      }
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          iconOpen.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
