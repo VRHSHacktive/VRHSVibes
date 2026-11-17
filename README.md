@@ -1,0 +1,1 @@
+AI Prompt: Could you code me a website (using HTML and CSS) about astronomy? Discuss classification of planets, stars, nebulae, and galaxies, along with how to identify them. Also discuss telescope and binocular types and uses, celestial coordinates, and how to go stargazing (and start identifying constellations and objects).
